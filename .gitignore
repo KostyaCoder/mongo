@@ -1,0 +1,9 @@
+.*
+node_modules/
+sequelize*json
+public/
+*.mongodb.*
+
+!.gitignore
+!.gitkeep
+!.*rc
