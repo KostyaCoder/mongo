@@ -1,10 +1,10 @@
 const carRouter = require("express").Router();
-const carController = require("../controllers/mans.controller");
+const carController = require("../controllers/cars.controller");
 
 carRouter.post("/", carController.createCar);
 carRouter.get("/", carController.getCars);
-carRouter.get("/:manId", carController.getCar);
-carRouter.put("/:manId", carController.updateCar);
-carRouter.delete("/:manId", carController.deleteCar);
+carRouter.get("/:carId", carController.getCar);
+carRouter.put("/:carId", carController.updateCar);
+carRouter.delete("/:carId", carController.deleteCar);
 
 module.exports = carRouter;
