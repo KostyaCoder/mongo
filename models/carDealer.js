@@ -12,4 +12,4 @@ const carDealerSchema = new Schema({
   ],
 });
 
-module.exports.Car = model("carDealer", carDealerSchema);
+module.exports = model("carDealer", carDealerSchema);

@@ -12,4 +12,4 @@ const reviewSchema = new Schema({
   },
 });
 
-module.exports.Car = model("Review", reviewSchema);
+module.exports = model("Review", reviewSchema);

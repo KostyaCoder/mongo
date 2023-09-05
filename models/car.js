@@ -7,6 +7,13 @@ const carSchema = new Schema({
   mileage: { type: Number, default: 0 },
   color: { type: String },
   insured: { type: Boolean, default: false, required: true },
+  reviews: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Review",
+      required: true,
+    },
+  ],
   dealers: [
     {
       type: Schema.Types.ObjectId,
@@ -16,4 +23,4 @@ const carSchema = new Schema({
   ],
 });
 
-module.exports.Car = model("Car", carSchema);
+module.exports = model("Car", carSchema);
