@@ -7,6 +7,13 @@ const carSchema = new Schema({
   mileage: { type: Number, default: 0 },
   color: { type: String },
   insured: { type: Boolean, default: false, required: true },
+  dealers: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "carDealer",
+      required: true,
+    },
+  ],
 });
 
 module.exports.Car = model("Car", carSchema);
