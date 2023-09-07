@@ -14,7 +14,7 @@ module.exports.createCar = async (req, resp, next) => {
 
 module.exports.getCars = async (req, resp, next) => {
   try {
-    const cars = await Car.find();
+    const cars = await Car.find({}, "-__v").populate("reviews", "-__v");
 
     resp.status(200).send({ data: cars });
   } catch (error) {
