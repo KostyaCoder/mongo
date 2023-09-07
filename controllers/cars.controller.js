@@ -28,7 +28,7 @@ module.exports.getCar = async (req, resp, next) => {
       params: { carId },
     } = req;
 
-    const car = await Car.findById(carId);
+    const car = await Car.findById(carId, "-__v").populate("reviews", "-__v");
 
     resp.status(200).send({ data: car });
   } catch (error) {
