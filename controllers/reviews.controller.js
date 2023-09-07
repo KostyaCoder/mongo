@@ -35,7 +35,9 @@ module.exports.getCarReviews = async (req, res, next) => {
       {
         car: car._id,
       },
-      "-__v"
+      "-__v",
+      "car",
+      "-__v -reviews"
     );
 
     res.send({ data: carReviews });
@@ -51,10 +53,15 @@ module.exports.getReview = async (req, res, next) => {
       car: { _id: carId },
     } = req;
 
-    const review = await Review.findOne({
-      _id: reviewId,
-      car: carId,
-    });
+    const review = await ReviewService.findReviews(
+      {
+        _id: reviewId,
+        car: carId,
+      },
+      "-__v",
+      "car",
+      "-__v -reviews"
+    );
 
     if (!review) {
       return next(createHttpError(404, "Review not found"));
@@ -96,14 +103,16 @@ module.exports.updateReview = async (req, res, next) => {
 module.exports.deleteReview = async (req, res, next) => {
   try {
     const {
-      car: { _id: carId },
+      car,
       params: { reviewId },
     } = req;
 
     const review = await Review.findOneAndDelete({
       _id: reviewId,
-      car: carId,
+      car: car._id,
     });
+
+    car.updateOne({ $pull: { reviews: reviewId } });
 
     if (!review) {
       return next(createHttpError(404, "Review not found"));

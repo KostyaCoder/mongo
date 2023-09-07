@@ -11,8 +11,16 @@ module.exports.createReview = async ({ car, body }) => {
   return newReview;
 };
 
-module.exports.findReviews = async (filter, select, populate) => {
-  const reviews = await Review.find(filter, select).populate(populate || "");
+module.exports.findReviews = async (
+  filter,
+  select,
+  populate = "",
+  populateSelect = ""
+) => {
+  const reviews = await Review.find(filter, select).populate(
+    populate,
+    populateSelect
+  );
 
   return reviews;
 };
