@@ -1,5 +1,6 @@
 const createHttpError = require("http-errors");
 const { Car, Review } = require("../models");
+const CarService = require("../services/car.service");
 
 module.exports.createCar = async (req, resp, next) => {
   try {
@@ -57,10 +58,7 @@ module.exports.deleteCar = async (req, resp, next) => {
       params: { carId },
     } = req;
 
-    const car = await Car.findByIdAndDelete(carId);
-    await Review.deleteMany({
-      _id: { $in: car.reviews },
-    });
+    const car = await CarService.deleteCar({ carId });
 
     resp.status(200).send({ data: car });
   } catch (error) {
