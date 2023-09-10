@@ -24,3 +24,18 @@ module.exports.findReviews = async (
 
   return reviews;
 };
+
+module.exports.deleteReview = async ({ car, reviewId }) => {
+  const review = await Review.findOneAndDelete({
+    _id: reviewId,
+    car: car._id,
+  });
+
+  if (!review) {
+    return next(createHttpError(404, "Review not found"));
+  }
+
+  car.updateOne({ $pull: { reviews: reviewId } });
+
+  return review;
+};

@@ -107,16 +107,7 @@ module.exports.deleteReview = async (req, res, next) => {
       params: { reviewId },
     } = req;
 
-    const review = await Review.findOneAndDelete({
-      _id: reviewId,
-      car: car._id,
-    });
-
-    car.updateOne({ $pull: { reviews: reviewId } });
-
-    if (!review) {
-      return next(createHttpError(404, "Review not found"));
-    }
+    const review = await ReviewService.deleteReview({ car, reviewId });
 
     res.send({ data: review });
   } catch (error) {
