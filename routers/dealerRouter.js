@@ -8,8 +8,8 @@ dealersRouter
 
 dealersRouter
   .route("/:dealersId")
-  .get(dealersController.getDealer);
-//   .put(dealersController.updateDealer)
+  .get(dealersController.getDealer)
+  .put(dealersController.updateDealer);
 //   .delete(dealersController.deleteDealer);
 
 module.exports = dealersRouter;

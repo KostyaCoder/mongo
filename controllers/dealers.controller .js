@@ -57,3 +57,30 @@ module.exports.getDealer = async (req, res, next) => {
   }
 };
 
+module.exports.updateDealer = async (req, res, next) => {
+  try {
+    const {
+      car: { _id: carId },
+      params: { dealersId },
+      body,
+    } = req;
+
+    const updatedDealer = await Dealer.findOneAndUpdate(
+      {
+        _id: dealersId,
+        cars: carId,
+      },
+      body,
+      { new: true }
+    );
+
+    if (!updatedDealer) {
+      return next(createHttpError(404, "Dealer not found"));
+    }
+
+    res.send({ data: updatedDealer });
+  } catch (error) {
+    next(error);
+  }
+};
+
