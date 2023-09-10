@@ -15,3 +15,18 @@ module.exports.createDealer = async (req, res, next) => {
   }
 };
 
+module.exports.getAllDealers = async (req, res, next) => {
+  try {
+    const dealers = await DealerService.findDealers(
+      {},
+      "-__v",
+      "cars",
+      "-__v -dealers"
+    );
+
+    res.send({ data: dealers });
+  } catch (error) {
+    next(error);
+  }
+};
+

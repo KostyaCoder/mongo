@@ -8,3 +8,16 @@ module.exports.createDealer = async ({ car, body }) => {
   return newDealer;
 };
 
+module.exports.findDealers = async (
+  filter,
+  select,
+  populate = "",
+  populateSelect = ""
+) => {
+  const dealers = await Dealer.find(filter, select).populate(
+    populate,
+    populateSelect
+  );
+
+  return dealers;
+};

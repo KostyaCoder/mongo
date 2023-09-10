@@ -3,8 +3,8 @@ const dealersController = require("../controllers/dealers.controller ");
 
 dealersRouter
   .route("/")
-  .post(dealersController.createDealer);
-  // .get(dealersController.getCarDealers);
+  .post(dealersController.createDealer)
+  .get(dealersController.getAllDealers);
 
 // dealersRouter
 //   .route("/:dealersId")
