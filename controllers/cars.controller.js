@@ -15,7 +15,10 @@ module.exports.createCar = async (req, resp, next) => {
 
 module.exports.getCars = async (req, resp, next) => {
   try {
-    const cars = await Car.find({}, "-__v").populate("reviews", "-__v");
+    const cars = await Car.find({}, "-__v").populate(
+      "reviews dealers",
+      "-__v -car -cars"
+    );
 
     resp.status(200).send({ data: cars });
   } catch (error) {
@@ -29,7 +32,10 @@ module.exports.getCar = async (req, resp, next) => {
       params: { carId },
     } = req;
 
-    const car = await Car.findById(carId, "-__v").populate("reviews", "-__v");
+    const car = await Car.findById(carId, "-__v").populate(
+      "reviews dealers",
+      "-__v -car -cars"
+    );
 
     resp.status(200).send({ data: car });
   } catch (error) {
