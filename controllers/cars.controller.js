@@ -1,5 +1,5 @@
 const createHttpError = require("http-errors");
-const { Car, Review } = require("../models");
+const { Car } = require("../models");
 const CarService = require("../services/car.service");
 
 module.exports.createCar = async (req, resp, next) => {
