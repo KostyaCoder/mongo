@@ -6,9 +6,9 @@ dealersRouter
   .post(dealersController.createDealer)
   .get(dealersController.getAllDealers);
 
-// dealersRouter
-//   .route("/:dealersId")
-//   .get(dealersController.getDealer)
+dealersRouter
+  .route("/:dealersId")
+  .get(dealersController.getDealer);
 //   .put(dealersController.updateDealer)
 //   .delete(dealersController.deleteDealer);
 
