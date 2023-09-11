@@ -21,3 +21,19 @@ module.exports.findDealers = async (
 
   return dealers;
 };
+
+module.exports.deleteDealer = async ({dealersId, car}) => {
+  const dealer = await Dealer.findOneAndDelete({
+    _id: dealersId,
+    cars: car._id,
+  });
+
+  if (!dealer) {
+    return next(createHttpError(404, "Dealer not found"));
+  }
+
+  await car.updateOne({ $pull: { dealers: dealersId } });
+  await dealer.updateOne({ $pull: { cars: car._id } });
+
+  return dealer;
+};

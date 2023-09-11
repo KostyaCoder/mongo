@@ -1,3 +1,4 @@
+const { Dealer } = require("../models");
 const DealerService = require("../services/dealer.service");
 
 module.exports.createDealer = async (req, res, next) => {
@@ -84,3 +85,17 @@ module.exports.updateDealer = async (req, res, next) => {
   }
 };
 
+module.exports.deleteDealer = async (req, res, next) => {
+  try {
+    const {
+      car,
+      params: { dealersId },
+    } = req;
+
+    const dealer = await DealerService.deleteDealer({dealersId, car});
+    
+    res.send({ data: dealer });
+  } catch (error) {
+    next(error);
+  }
+};
